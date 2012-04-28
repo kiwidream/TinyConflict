@@ -1,4 +1,4 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Entity;
 
 import java.util.Random;
 

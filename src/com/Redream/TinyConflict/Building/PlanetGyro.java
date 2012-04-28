@@ -1,4 +1,4 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Building;
 
 
 public class PlanetGyro extends Building {

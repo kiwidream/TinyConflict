@@ -1,6 +1,9 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Building;
 
 import java.util.Random;
+
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Planet.Planet;
 
 public class Citizen extends Building {
 	public float moveamt = 0.15f;

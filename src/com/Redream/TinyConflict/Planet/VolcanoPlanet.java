@@ -1,4 +1,8 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Planet;
+
+import com.Redream.TinyConflict.Graphics.Display;
+import com.Redream.TinyConflict.Graphics.Renderable;
+
 
 public class VolcanoPlanet extends Planet{
 	public VolcanoPlanet(){

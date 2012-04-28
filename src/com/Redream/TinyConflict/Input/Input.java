@@ -1,7 +1,9 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Input;
 
 import java.util.ArrayList;
 
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Graphics.Camera;
 import com.badlogic.gdx.InputProcessor;
 
 public class Input implements InputProcessor{

@@ -1,5 +1,6 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Graphics;
 
+import com.Redream.TinyConflict.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 

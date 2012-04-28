@@ -1,4 +1,8 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Building;
+
+import com.Redream.TinyConflict.Graphics.Display;
+import com.Redream.TinyConflict.Graphics.Renderable;
+import com.Redream.TinyConflict.Planet.Planet;
 
 public class Building extends Renderable {
 	public Planet home;

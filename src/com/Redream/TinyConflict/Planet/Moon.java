@@ -1,4 +1,4 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Planet;
 
 public class Moon extends Planet {
 	public Moon(){

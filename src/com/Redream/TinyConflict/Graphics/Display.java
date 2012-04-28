@@ -1,4 +1,4 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Graphics;
 
 import java.util.ArrayList;
 import java.util.Collections;

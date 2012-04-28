@@ -1,5 +1,8 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Graphics;
 
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Input.InputListener;
+import com.Redream.TinyConflict.Resources.Resources;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;

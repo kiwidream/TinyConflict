@@ -1,4 +1,4 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Planet;
 
 public class Asteroid extends Planet {
 	public Asteroid(){

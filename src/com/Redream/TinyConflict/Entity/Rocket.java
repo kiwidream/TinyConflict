@@ -1,6 +1,12 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Entity;
 
 import java.util.Random;
+
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Graphics.Camera;
+import com.Redream.TinyConflict.Graphics.Renderable;
+import com.Redream.TinyConflict.Planet.Planet;
+import com.Redream.TinyConflict.Resources.Resources;
 
 public class Rocket extends Renderable {
 	public float dir;

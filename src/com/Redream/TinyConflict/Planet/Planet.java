@@ -1,9 +1,23 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Planet;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Building.Building;
+import com.Redream.TinyConflict.Building.Citizen;
+import com.Redream.TinyConflict.Building.Housing;
+import com.Redream.TinyConflict.Building.Miner;
+import com.Redream.TinyConflict.Building.PlanetGyro;
+import com.Redream.TinyConflict.Building.RocketBuilding;
+import com.Redream.TinyConflict.Building.Turret;
+import com.Redream.TinyConflict.Entity.Entity;
+import com.Redream.TinyConflict.Graphics.Camera;
+import com.Redream.TinyConflict.Graphics.Display;
+import com.Redream.TinyConflict.Graphics.Font;
+import com.Redream.TinyConflict.Graphics.Renderable;
+import com.Redream.TinyConflict.Input.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;

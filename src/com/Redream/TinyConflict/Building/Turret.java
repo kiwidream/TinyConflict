@@ -1,8 +1,17 @@
-package com.Redream.TinyConflict;
+package com.Redream.TinyConflict.Building;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.Redream.TinyConflict.Game;
+import com.Redream.TinyConflict.Entity.Bullet;
+import com.Redream.TinyConflict.Graphics.Camera;
+import com.Redream.TinyConflict.Graphics.Display;
+import com.Redream.TinyConflict.Graphics.Renderable;
+import com.Redream.TinyConflict.Input.Input;
+import com.Redream.TinyConflict.Planet.Planet;
+import com.Redream.TinyConflict.Resources.Resources;
 
 public class Turret extends Building {
 	private Renderable gun= new Renderable();
