@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ public class Turret extends Building {
 		this.name = "Anti-Planet Turret";
 		this.desc = "Shoots lasers at foes";
 		this.cost = 400;
-		this.pvtex = 17;
 		gun.tex = 19;
 		gun.xScale = 1;
 		gun.yScale = 1;

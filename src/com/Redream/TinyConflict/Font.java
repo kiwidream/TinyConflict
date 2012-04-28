@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,8 +32,6 @@ public class Font extends Renderable{
 		
 		if(pos == POS_RIGHT) x -= Resources.font.getBounds(txt).width;
 		if(pos == POS_CENTER)x -= Resources.font.getBounds(txt).width/2;
-		
-		
 		
 		Resources.font.setColor(color);
 		Resources.font.draw(batch, txt, x, y);

@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 
 public class Resources {
-	public static TextureAtlas atlas = new TextureAtlas(file("pack"));
+	public static TextureAtlas atlas;
 
 	public static boolean[] flipX = new boolean[500];
 	public static boolean[] flipY = new boolean[500];

@@ -59,13 +59,6 @@ repeat: none
   orig: 50, 50
   offset: 0, 0
   index: -1
-16
-  rotate: false
-  xy: 471, 180
-  size: 39, 50
-  orig: 39, 50
-  offset: 0, 0
-  index: -1
 10
   rotate: false
   xy: 461, 247
@@ -75,7 +68,7 @@ repeat: none
   index: -1
 13
   rotate: false
-  xy: 404, 356
+  xy: 471, 180
   size: 39, 45
   orig: 39, 45
   offset: 0, 0
@@ -96,21 +89,14 @@ repeat: none
   index: -1
 24
   rotate: false
-  xy: 456, 304
+  xy: 404, 356
   size: 39, 30
   orig: 39, 30
   offset: 0, 0
   index: -1
-17
-  rotate: false
-  xy: 474, 149
-  size: 33, 25
-  orig: 33, 25
-  offset: 0, 0
-  index: -1
 4
   rotate: false
-  xy: 456, 336
+  xy: 474, 149
   size: 25, 25
   orig: 25, 25
   offset: 0, 0
@@ -124,42 +110,28 @@ repeat: none
   index: -1
 22
   rotate: false
-  xy: 483, 336
+  xy: 471, 227
   size: 23, 18
   orig: 23, 18
   offset: 0, 0
   index: -1
 23
   rotate: false
-  xy: 456, 363
+  xy: 456, 304
   size: 29, 16
   orig: 29, 16
   offset: 0, 0
   index: -1
-2
-  rotate: false
-  xy: 487, 130
-  size: 13, 16
-  orig: 13, 16
-  offset: 0, 0
-  index: -1
-5
-  rotate: false
-  xy: 509, 108
-  size: 1, 15
-  orig: 1, 15
-  offset: 0, 0
-  index: -1
 18
   rotate: false
-  xy: 149, 507
+  xy: 404, 388
   size: 33, 14
   orig: 33, 14
   offset: 0, 0
   index: -1
 20
   rotate: false
-  xy: 471, 232
+  xy: 487, 130
   size: 13, 13
   orig: 13, 13
   offset: 0, 0
@@ -171,44 +143,23 @@ repeat: none
   orig: 6, 13
   offset: 0, 0
   index: -1
-7
-  rotate: false
-  xy: 486, 232
-  size: 11, 11
-  orig: 11, 11
-  offset: 0, 0
-  index: -1
-6
-  rotate: false
-  xy: 499, 232
-  size: 11, 9
-  orig: 11, 9
-  offset: 0, 0
-  index: -1
-1
-  rotate: false
-  xy: 461, 294
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
 9
   rotate: false
-  xy: 471, 294
+  xy: 501, 149
   size: 8, 4
   orig: 8, 4
   offset: 0, 0
   index: -1
 8
   rotate: false
-  xy: 481, 294
+  xy: 501, 155
   size: 7, 4
   orig: 7, 4
   offset: 0, 0
   index: -1
 11
   rotate: false
-  xy: 509, 125
+  xy: 509, 108
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

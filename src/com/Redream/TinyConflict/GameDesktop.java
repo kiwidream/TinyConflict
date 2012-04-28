@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -13,6 +13,6 @@ public class GameDesktop{
 		config.useGL20 = false;
 		config.height = 480;
 		config.width = 800;
-		new LwjglApplication(new Game(), config);
+		new LwjglApplication(new Game(false), config);
 	}
 } 

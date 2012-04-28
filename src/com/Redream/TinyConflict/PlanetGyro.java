@@ -1,10 +1,9 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 
 public class PlanetGyro extends Building {
 	public PlanetGyro() {
 		this.tex = 24;
-		this.pvtex = 24;
 		this.xScale = 0.3f;
 		this.yScale = 0.3f;
 		this.origX = 19;

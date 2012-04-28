@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 public class Building extends Renderable {
 	public Planet home;
@@ -11,7 +11,6 @@ public class Building extends Renderable {
 	public String name = "Building";
 	public String desc = "Can be built";
 	public int cost = 100;
-	public int pvtex = 0;
 
 	public double elevation;
 	

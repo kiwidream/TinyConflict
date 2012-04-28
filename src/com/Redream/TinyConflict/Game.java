@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
 
 
@@ -24,6 +25,7 @@ public class Game implements ApplicationListener, InputListener {
 	public static float screenRatioY;
 	public static float screenRatioX;
 	public static boolean debug;
+	public static boolean mobile;
 
 	private SpriteBatch batch;
 	private Display display;
@@ -43,8 +45,13 @@ public class Game implements ApplicationListener, InputListener {
 
 	public static int gameStage;
 	public static int winTime;
+	
+	public Game(boolean mobile){
+		Game.mobile = mobile;
+	}
 
 	public void create() {
+		Resources.atlas = new TextureAtlas(Resources.file("pack"));
 		Camera.cam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
 
 		Camera.HUDcam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
@@ -53,10 +60,9 @@ public class Game implements ApplicationListener, InputListener {
 		this.batch = new SpriteBatch();
 		this.display = new Display(this.batch);
 
-
 		this.input = new Input();
 		Gdx.input.setInputProcessor(input);
-		Resources.font.setColor(Color.BLACK);
+
 		stars = new Renderable();
 		stars.tex = 3;
 		stars.z = -1;
@@ -251,21 +257,19 @@ public class Game implements ApplicationListener, InputListener {
 	public void resize(int width, int height) {
 		float dratio = (float)width/(float)height;
 
-		Game.WIDTH = (int) (480 * dratio);
+		Game.WIDTH = (int) Math.ceil(480 * dratio);
 		Game.HEIGHT = 480;
-
+		
 		Game.screenRatioX = (float)Game.WIDTH / (float)width;
 		Game.screenRatioY = (float)Game.HEIGHT / (float)height;
-
-		Gdx.graphics.setDisplayMode(width, height, false);
 
 		DIAGDIST = (float) Math.abs(Math.sqrt(Math.pow(-Game.WIDTH, 2.0D) + Math.pow(Game.HEIGHT, 2.0D)));
 
 		Camera.cam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
-		Camera.cam.update();
 	}
 
 	public void resume() {
+		Resources.atlas = new TextureAtlas(Resources.file("pack"));
 	}
 
 	@Override
@@ -277,16 +281,18 @@ public class Game implements ApplicationListener, InputListener {
 	public Rectangle getBounds() {
 		return null;
 	}
+	
+	public void stageProgress(){
+		if(gameStage < 2)gameStage++;
+		if(gameStage == 3){
+			gameStage = 0;
+			needsInit = true;
+		}
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode == Keys.SPACE){
-			if(gameStage < 2)gameStage++;
-			if(gameStage == 3){
-				gameStage = 0;
-				needsInit = true;
-			}
-		}
+		if(keycode == Keys.SPACE)stageProgress();
 		return true;
 	}
 
@@ -302,7 +308,8 @@ public class Game implements ApplicationListener, InputListener {
 
 	@Override
 	public boolean touchDown(int x, int y, int pointer) {
-		return false;
+		stageProgress();
+		return true;
 	}
 
 	@Override

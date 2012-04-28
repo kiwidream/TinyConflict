@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.Random;
 
@@ -18,8 +18,7 @@ public class RocketBuilding extends Building {
 		
 		this.name = "Rocket Launch Facility";
 		this.desc = "Launches powerful rockets!";
-		this.cost = 600;
-		this.pvtex = 16;
+		this.cost = 750;
 	}
 	
 	public void queueRender(Display display) {

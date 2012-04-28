@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,18 +74,21 @@ public class Planet extends Entity {
 		}
 
 		if(editing && editselect != 9999 && isplayer){
+			Building pv = this.getBuildables().get(editselect);
 			cursor = new Renderable();
-			cursor.tex = this.getBuildables().get(editselect).pvtex;
-			cursor.xScale = this.getBuildables().get(editselect).xScale;
+			cursor.tex = pv.tex;
+			cursor.xScale = pv.xScale;
 			cursor.yScale = cursor.xScale;
+			cursor.origX = pv.origX;
+			cursor.origY = pv.origY;
 			cursor.z = 110;
 
 			double cangle = Math.atan2((Math.abs(Game.HEIGHT-y))-this.origY-this.y+Camera.cam.position.y, x-this.origX-this.x+Camera.cam.position.x);
-
-			cursor.x = (float) (this.x+this.origX+Math.cos(cangle)*radius*xScale*0.92);
-			cursor.y = (float) (this.y+this.origY+Math.sin(cangle)*radius*yScale*0.92);
+			
+			cursor.x = (float) (this.x+origX-pv.origX+Math.cos(cangle)*radius);
+			cursor.y = (float) (this.y+origY-pv.origY+Math.sin(cangle)*radius);
 			cursor.color = hudColor;
-			cursor.rot = (float) Math.toDegrees(cangle)-90f;
+			cursor.rot = (float) ((Math.toDegrees(cangle)-90f)%360f);
 		}
 		return true;
 	}
@@ -116,6 +119,7 @@ public class Planet extends Entity {
 				this.addSelect = editselect;
 			}
 		}
+		
 		return true;
 	}
 

@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 public class Asteroid extends Planet {
 	public Asteroid(){

@@ -1,11 +1,10 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.Random;
 
 public class Housing extends Building {
 	public Housing(){
 		this.tex = 22;
-		this.pvtex = 22;
 		this.xScale = 0.5f;
 		this.yScale = 0.5f;
 		this.origX = 11;

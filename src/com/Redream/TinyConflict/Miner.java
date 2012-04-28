@@ -1,4 +1,4 @@
-package com.Redream.LD23;
+package com.Redream.TinyConflict;
 
 import java.util.Random;
 
@@ -7,7 +7,6 @@ public class Miner extends Building {
 
 	public Miner() {
 		this.tex = 23;
-		this.pvtex = 23;
 		if(new Random().nextBoolean())moveamt  *= -1;
 		this.xScale = 0.5f;
 		this.yScale = 0.5f;
