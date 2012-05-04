@@ -19,6 +19,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Rectangle;
@@ -61,10 +62,7 @@ public class Game implements ApplicationListener, InputListener {
 
 	public void create() {
 		Resources.atlas = new TextureAtlas(Resources.file("pack"));
-		Camera.cam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
-
-		Camera.HUDcam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
-		Camera.HUDcam.update();
+		Resources.atlas.getRegions().get(0).getTexture().setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 
 		this.batch = new SpriteBatch();
 		this.display = new Display(this.batch);
@@ -78,6 +76,9 @@ public class Game implements ApplicationListener, InputListener {
 		stars.xScale = 4;
 		stars.yScale = 4;
 		initPlanets();
+		
+		Camera.cam = new OrthographicCamera(WIDTH, HEIGHT);
+		Camera.HUDcam = new OrthographicCamera(WIDTH, HEIGHT);
 		
 		Input.registerListener(this);
 	}
@@ -266,19 +267,21 @@ public class Game implements ApplicationListener, InputListener {
 	public void resize(int width, int height) {
 		float dratio = (float)width/(float)height;
 
-		Game.WIDTH = (int) Math.ceil(480 * dratio);
+		Game.WIDTH = (int) (480 * dratio);
 		Game.HEIGHT = 480;
 		
 		Game.screenRatioX = (float)Game.WIDTH / (float)width;
 		Game.screenRatioY = (float)Game.HEIGHT / (float)height;
-
+		
+		Gdx.graphics.setDisplayMode(width, height, false);
+		
 		DIAGDIST = (float) Math.abs(Math.sqrt(Math.pow(-Game.WIDTH, 2.0D) + Math.pow(Game.HEIGHT, 2.0D)));
-
+		
 		Camera.cam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
+		Camera.HUDcam = new OrthographicCamera(Game.WIDTH, Game.HEIGHT);
 	}
 
 	public void resume() {
-		Resources.atlas = new TextureAtlas(Resources.file("pack"));
 	}
 
 	@Override

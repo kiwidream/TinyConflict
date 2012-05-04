@@ -22,7 +22,7 @@ public class Resources {
 	
 	public static FileHandle file(String src) {
 		FileHandle fh;
-		fh = Gdx.files.internal("com/Redream/LD23/" + src);
+		fh = Gdx.files.internal("com/Redream/TinyConflict/Resources/" + src);
 		if(!fh.exists())fh = Gdx.files.internal(src);
 		return fh;
 	}
