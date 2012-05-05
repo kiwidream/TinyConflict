@@ -64,6 +64,10 @@ public class Planet extends Entity {
 	public double migratedist;
 	private int popToAdd;
 	private int gc;
+	
+	private int lastX;
+	private int lastY;
+	private boolean touchMove;
 
 	public Planet(){
 		Input.registerListener(this);
@@ -77,7 +81,15 @@ public class Planet extends Entity {
 	}
 
 	public Rectangle getBounds(){
-		return new Rectangle(x-radius/2,y-radius/2,radius*xScale*2f,radius*yScale*2f);
+		return new Rectangle(x,y,radius*xScale*2f,radius*yScale*2f);
+	}
+	
+	public boolean touchDragged(int x, int y,int pointer){
+		this.touchMoved(x, y);
+		lastX = x;
+		lastY = y;
+		this.touchMove = true;
+		return true;
 	}
 
 	public boolean touchMoved(int x, int y){
@@ -86,7 +98,7 @@ public class Planet extends Entity {
 		}else{
 			showDialog = false;
 		}
-
+		
 		if(editing && editselect != 9999 && isplayer){
 			Building pv = this.getBuildables().get(editselect);
 			cursor = new Renderable();
@@ -107,8 +119,17 @@ public class Planet extends Entity {
 		return true;
 	}
 
+	public boolean touchUp(int pointer, int x, int y){
+		this.touchMove = false;
+		return true;
+	}
+	
 	public boolean touchDown(int pointer, int x, int y){
-		if(showDialog && isplayer){
+		lastX = x;
+		lastY = y;
+		this.touchMove = true;
+		
+		if(showDialog && isplayer && this.getBounds().contains(x+Camera.cam.position.x, (Math.abs(y-Game.HEIGHT))+Camera.cam.position.y)){
 			editing = true;
 			Game.editing = true;
 		}
@@ -135,6 +156,19 @@ public class Planet extends Entity {
 		}
 		
 		return true;
+	}
+
+	private void touchMove(int x, int y) {
+		float speed = 2.5f+(gc*0.75f);
+		float resp = 0.02f+(gc*0.01f);
+		
+		y = Game.HEIGHT - y;
+		float mdir = (float) (Math.atan2(y-(this.y+this.origY-Camera.cam.position.y),x-(this.x+this.origX-Camera.cam.position.x)));
+		float speedX = (float) (Math.cos(mdir)*speed);
+		float speedY = (float) (Math.sin(mdir)*speed);
+		
+		this.vY += (speedY - vY)*resp;
+		this.vX += (speedX - vX)*resp;
 	}
 
 	public void tick(){
@@ -210,6 +244,10 @@ public class Planet extends Entity {
 			if(up)this.vY += (speed - vY)*resp;
 			if(left)this.vX += (-speed - vX)*resp;
 			if(right)this.vX += (speed - vX)*resp;
+			
+			if(isplayer&& this.touchMove){
+				this.touchMove(lastX, lastY);
+			}
 
 			if(Game.migratingTo == null){
 				this.move();
