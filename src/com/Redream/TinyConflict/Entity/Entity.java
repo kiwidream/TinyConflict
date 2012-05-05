@@ -52,7 +52,7 @@ public class Entity extends Renderable {
 					float py = (float) (y+origY+Math.sin(Math.toRadians(normal+90))*radius*yScale);
 					float px = (float) (x+origX+Math.cos(Math.toRadians(normal+90))*radius*xScale);
 					
-					if(Camera.getBounds().contains(px, py))Resources.xplode.play();
+					if(origv > 1 && Camera.getBounds().contains(px, py))Resources.xplode.play();
 					
 					for(int j=0;j<origv*10;j++)Game.entities.add(new Particle((float)(px+new Random().nextGaussian()*5f),(float)(py+new Random().nextGaussian()*5f),(float) origv/4f,new Random().nextFloat()*360,new Random().nextInt(50)+15));
 				}
