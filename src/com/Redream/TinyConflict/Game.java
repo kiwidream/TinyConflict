@@ -55,6 +55,7 @@ public class Game implements ApplicationListener, InputListener {
 
 	public static int gameStage;
 	public static int winTime;
+	public static Planet pselected = null;
 	
 	public Game(boolean mobile){
 		Game.mobile = mobile;
@@ -126,7 +127,7 @@ public class Game implements ApplicationListener, InputListener {
 
 		Gdx.gl10.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		Gdx.gl10.glClearColor(0.05f,0.047f,0.086f,1);
-
+		
 		if(gameStage == 2){
 			for(Planet p : planets){
 				p.queueRender(display);
@@ -218,7 +219,6 @@ public class Game implements ApplicationListener, InputListener {
 				new Font("Thank you for playing! Press space to restart.", Game.WIDTH/2, 10, Font.POS_CENTER, false, Color.WHITE, 2).queueRender(display);
 			}
 
-			
 		}
 
 

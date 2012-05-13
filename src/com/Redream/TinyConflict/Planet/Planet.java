@@ -303,7 +303,7 @@ public class Planet extends Entity {
 		for(Building b : buildings){
 			b.queueRender(display);
 		}
-		
+			
 		if(Game.pselected == this && !editing){
 			Renderable ch = new Renderable();
 			ch.tex = 1;
