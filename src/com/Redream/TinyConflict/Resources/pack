@@ -1,7 +1,7 @@
 
 textures1.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
 3
   rotate: false
@@ -87,23 +87,9 @@ repeat: none
   orig: 11, 39
   offset: 0, 0
   index: -1
-2
-  rotate: false
-  xy: 267, 446
-  size: 96, 32
-  orig: 96, 32
-  offset: 0, 0
-  index: -1
-1
-  rotate: false
-  xy: 404, 356
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
 24
   rotate: false
-  xy: 456, 304
+  xy: 404, 356
   size: 39, 30
   orig: 39, 30
   offset: 0, 0
@@ -131,14 +117,14 @@ repeat: none
   index: -1
 23
   rotate: false
-  xy: 456, 336
+  xy: 456, 304
   size: 29, 16
   orig: 29, 16
   offset: 0, 0
   index: -1
 18
   rotate: false
-  xy: 456, 354
+  xy: 404, 388
   size: 33, 14
   orig: 33, 14
   offset: 0, 0
