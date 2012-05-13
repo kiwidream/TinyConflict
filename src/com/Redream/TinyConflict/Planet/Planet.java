@@ -46,8 +46,6 @@ public class Planet extends Entity {
 	public int population;
 	public int migrateCount;
 
-	public boolean showDialog;
-
 	public String name = "Planet";
 
 	public List<Building> buildings = new ArrayList<Building>();
@@ -64,7 +62,7 @@ public class Planet extends Entity {
 	public double migratedist;
 	private int popToAdd;
 	private int gc;
-	
+
 	private int lastX;
 	private int lastY;
 	private boolean touchMove;
@@ -76,14 +74,14 @@ public class Planet extends Entity {
 
 		this.addBuilding(new Housing(),true);
 		this.addBuilding(new Miner(),true);
-		
+
 		this.collisionFX = true;
 	}
 
 	public Rectangle getBounds(){
 		return new Rectangle(x,y,radius*xScale*2f,radius*yScale*2f);
 	}
-	
+
 	public boolean touchDragged(int x, int y,int pointer){
 		this.touchMoved(x, y);
 		lastX = x;
@@ -94,11 +92,9 @@ public class Planet extends Entity {
 
 	public boolean touchMoved(int x, int y){
 		if(!Game.editing && this.getBounds().contains(x+Camera.cam.position.x, (Math.abs(y-Game.HEIGHT))+Camera.cam.position.y)){
-			showDialog = true;
-		}else{
-			showDialog = false;
+			Game.pselected = this;
 		}
-		
+
 		if(editing && editselect != 9999 && isplayer){
 			Building pv = this.getBuildables().get(editselect);
 			cursor = new Renderable();
@@ -110,9 +106,9 @@ public class Planet extends Entity {
 			cursor.z = 110;
 
 			double cangle = Math.atan2((Math.abs(Game.HEIGHT-y))-this.origY-this.y+Camera.cam.position.y, x-this.origX-this.x+Camera.cam.position.x);
-			
-			cursor.x = (float) (this.x+origX-pv.origX+Math.cos(cangle)*radius);
-			cursor.y = (float) (this.y+origY-pv.origY+Math.sin(cangle)*radius);
+
+			cursor.x = (float) (this.x+origX-pv.origX+Math.cos(cangle)*radius*xScale);
+			cursor.y = (float) (this.y+origY-pv.origY+Math.sin(cangle)*radius*yScale);
 			cursor.color = hudColor;
 			cursor.rot = (float) ((Math.toDegrees(cangle)-90f)%360f);
 		}
@@ -123,18 +119,18 @@ public class Planet extends Entity {
 		this.touchMove = false;
 		return true;
 	}
-	
+
 	public boolean touchDown(int pointer, int x, int y){
 		lastX = x;
 		lastY = y;
 		this.touchMove = true;
-		
-		if(showDialog && isplayer && this.getBounds().contains(x+Camera.cam.position.x, (Math.abs(y-Game.HEIGHT))+Camera.cam.position.y)){
+
+		if(Game.pselected == this && isplayer && new Rectangle(Game.WIDTH/2 - 96,10,96*2,64).contains(x, (Math.abs(y-Game.HEIGHT)))){
 			editing = true;
 			Game.editing = true;
 		}
 
-		if(this.population == 0 && popToAdd == 0 && showDialog && !isplayer && Game.migratingTo == null && !Game.editing){
+		if(Game.pselected == this && this.population == 0 && popToAdd == 0 && !isplayer && Game.migratingTo == null && !Game.editing && new Rectangle(Game.WIDTH/2 - 96,10,96*2,64).contains(x, (Math.abs(y-Game.HEIGHT)))){
 			Game.migratingTo = this;
 		}
 
@@ -154,19 +150,19 @@ public class Planet extends Entity {
 				this.addSelect = editselect;
 			}
 		}
-		
+
 		return true;
 	}
 
 	private void touchMove(int x, int y) {
 		float speed = 2.5f+(gc*0.75f);
 		float resp = 0.02f+(gc*0.01f);
-		
+
 		y = Game.HEIGHT - y;
 		float mdir = (float) (Math.atan2(y-(this.y+this.origY-Camera.cam.position.y),x-(this.x+this.origX-Camera.cam.position.x)));
 		float speedX = (float) (Math.cos(mdir)*speed);
 		float speedY = (float) (Math.sin(mdir)*speed);
-		
+
 		this.vY += (speedY - vY)*resp;
 		this.vX += (speedX - vX)*resp;
 	}
@@ -222,9 +218,9 @@ public class Planet extends Entity {
 				right = false;
 
 				Camera.target = p;
-				
+
 				if(Game.migratingTo.pid == 5)Game.winTime = 1;
-				
+
 				Game.migratingTo = null;
 			}
 		}
@@ -244,7 +240,7 @@ public class Planet extends Entity {
 			if(up)this.vY += (speed - vY)*resp;
 			if(left)this.vX += (-speed - vX)*resp;
 			if(right)this.vX += (speed - vX)*resp;
-			
+
 			if(isplayer&& this.touchMove){
 				this.touchMove(lastX, lastY);
 			}
@@ -254,7 +250,7 @@ public class Planet extends Entity {
 			}
 		}
 
-		if(!isplayer && Game.migratingTo == null){
+		if(!isplayer && Game.migratingTo == null && Game.pselected != this){
 			if(new Random().nextInt(80) == 0 && population < radius * 0.7){
 				this.addBuilding(new Housing(),false);
 			}else if(this.funds < 1500 && new Random().nextInt(200) == 0){
@@ -307,23 +303,42 @@ public class Planet extends Entity {
 		for(Building b : buildings){
 			b.queueRender(display);
 		}
-		if(showDialog && !editing){
-			Renderable dialog = new Renderable();
-			dialog.tex = 10;
-			dialog.xScale = 2;
-			dialog.yScale = 2;
-			dialog.x = x + origX - radius - 92;
-			dialog.y = y + origY + radius;
-			dialog.z = 10;
-			dialog.queueRender(display);
+		
+		if(Game.pselected == this && !editing){
+			Renderable ch = new Renderable();
+			ch.tex = 1;
+			ch.xScale = (this.origX * this.xScale)/14;
+			ch.color = this.hudColor;
+			ch.yScale = ch.xScale;
+			ch.x = this.x - (this.origX*(this.xScale-1)) - ch.xScale*16*0.125f;
+			ch.y = this.y - (this.origY*(this.yScale-1)) - ch.yScale*16*0.125f;
+			ch.z = 400;
+			ch.queueRender(display);
 
-			new Font(name, dialog.x + 5, dialog.y + 60, Font.POS_LEFT,true,Color.BLACK,1).queueRender(display);
-			new Font("Population: "+this.population, dialog.x + 5, dialog.y + 40, Font.POS_LEFT,true,Color.BLACK,1).queueRender(display);
-			new Font("Buildings: "+(this.buildings.size()-population), dialog.x + 5, dialog.y + 25, Font.POS_LEFT,true,Color.BLACK,1).queueRender(display);
 			if(isplayer){
-				new Font("Click to upgrade", dialog.x + 5, dialog.y + 5, Font.POS_LEFT,true,Color.BLACK,1).queueRender(display);
+				Renderable b1 = new Renderable();
+				b1.tex = 2;
+				b1.xScale = 2;
+				b1.yScale = 2;
+				b1.y = 10;
+				b1.applyCam = false;
+				b1.x = Game.WIDTH/2 - (96*b1.xScale)/2;
+
+				b1.queueRender(display);
+
+				new Font("Upgrade", Game.WIDTH/2, b1.y+20, Font.POS_CENTER, false, Color.DARK_GRAY, 3).queueRender(display);
 			}else if(population == 0 && Game.migratingTo == null){
-				new Font("Click to migrate", dialog.x + 5, dialog.y + 5, Font.POS_LEFT,true,Color.BLACK,1).queueRender(display);
+				Renderable b1 = new Renderable();
+				b1.tex = 2;
+				b1.xScale = 2;
+				b1.yScale = 2;
+				b1.y = 10;
+				b1.applyCam = false;
+				b1.x = Game.WIDTH/2 - (96*b1.xScale)/2;
+
+				b1.queueRender(display);
+
+				new Font("Migrate", Game.WIDTH/2, b1.y+20, Font.POS_CENTER, false, Color.DARK_GRAY, 3).queueRender(display);
 			}
 		}
 
@@ -346,7 +361,7 @@ public class Planet extends Entity {
 				Planet tp = Game.planets.get(id);
 				double tdir = Math.toDegrees(Math.atan2((tp.y+tp.origY*tp.yScale)-(y+origY*yScale),(tp.x+tp.origX*tp.xScale)-(x+origX*xScale)));
 				double tdir2 = Math.toRadians(tdir);
-				
+
 				Renderable point = new Renderable();
 				point.tex = 28;
 				point.xScale = 1;
@@ -354,10 +369,10 @@ public class Planet extends Entity {
 				point.origX = 10;
 				point.origY = 10;
 				point.z = 305;
-				point.x = (float) (x+origX*xScale-point.origX+Math.cos(tdir2)*(radius*xScale+20));
-				point.y = (float) (y+origY*yScale-point.origY+Math.sin(tdir2)*(radius*yScale+20));
+				point.x = (float) (x+origX-point.origX+Math.cos(tdir2)*(radius*xScale+20));
+				point.y = (float) (y+origY-point.origY+Math.sin(tdir2)*(radius*yScale+20));
 				point.rot = (float) ((tdir-90)%360);
-				
+
 				point.queueRender(display);
 			}
 		}
