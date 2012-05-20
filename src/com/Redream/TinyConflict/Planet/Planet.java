@@ -79,6 +79,19 @@ public class Planet extends Entity {
 	}
 
 	public Rectangle getBounds(){
+		float size = radius*xScale*2f;
+		
+		float x = this.x;
+		float y = this.y;
+		float radius = this.radius;
+		
+		if(size < 56){
+			float diff = (56 - radius*xScale*2f)/2;
+			x -= diff;
+			y -= diff;
+			radius += diff;
+		}
+		
 		return new Rectangle(x,y,radius*xScale*2f,radius*yScale*2f);
 	}
 
@@ -121,6 +134,7 @@ public class Planet extends Entity {
 	}
 
 	public boolean touchDown(int pointer, int x, int y){
+		this.touchMoved(x, y);
 		lastX = x;
 		lastY = y;
 		this.touchMove = true;
@@ -228,8 +242,8 @@ public class Planet extends Entity {
 		for(Building b : buildings){
 			b.tick();
 		}
-		this.rot += 0.15;
-		if(rot>360)rot=0;
+		//		this.rot += 0.15;
+		//		if(rot>360)rot=0;
 		this.vX *= 0.996;
 		this.vY *= 0.996;
 
@@ -303,18 +317,19 @@ public class Planet extends Entity {
 		for(Building b : buildings){
 			b.queueRender(display);
 		}
-			
+		
 		if(Game.pselected == this && !editing){
+			Rectangle bounds = this.getBounds();
 			Renderable ch = new Renderable();
 			ch.tex = 1;
-			ch.xScale = (this.origX * this.xScale)/14;
+			ch.xScale = (this.origX * bounds.width/this.width)/14;
 			ch.color = this.hudColor;
 			ch.yScale = ch.xScale;
-			ch.x = this.x - (this.origX*(this.xScale-1)) - ch.xScale*16*0.125f;
-			ch.y = this.y - (this.origY*(this.yScale-1)) - ch.yScale*16*0.125f;
+			ch.x = bounds.x - (this.origX*(this.xScale-1)) - ch.xScale*16*0.125f;
+			ch.y = bounds.y - (this.origY*(this.yScale-1)) - ch.yScale*16*0.125f;
 			ch.z = 400;
 			ch.queueRender(display);
-
+			
 			if(isplayer){
 				Renderable b1 = new Renderable();
 				b1.tex = 2;
